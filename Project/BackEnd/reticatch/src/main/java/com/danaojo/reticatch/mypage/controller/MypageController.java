@@ -4,13 +4,15 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.danaojo.reticatch.mypage.dto.ConfirmDTO;
+import com.danaojo.reticatch.mypage.dto.ConfirmQueryDTO;
 import com.danaojo.reticatch.mypage.service.MypageService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 @CrossOrigin(origins = "http://localhost:3001")
 @RestController
@@ -20,15 +22,10 @@ public class MypageController {
 	@Autowired
 	private MypageService mypageService;
 	
-	@GetMapping("/mypage/searchConfirm")
-	public List<ConfirmDTO> searchConfirm() {
-		List<ConfirmDTO> confirmList = mypageService.returnConfirmDTO(testName);
+	@PostMapping("/api/mypage/searchConfirmQuery") // 설정한 값으로 조회
+	public List<ConfirmDTO> searchConfirmQuery(@RequestBody ConfirmQueryDTO obj) throws JsonMappingException, JsonProcessingException {
+		List<ConfirmDTO> confirmList = mypageService.returnConfirmDTO(obj, testName);
 		
 		return confirmList;
-	}
-	
-	@PostMapping("/api/mypage/searchConfirmQuery")
-	public void searchConfirmQuery(@RequestBody String data) {
-		System.out.println("우오아앙");
 	}
 }
