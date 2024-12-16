@@ -1,0 +1,96 @@
+.confirm-title > h1 {
+  border-bottom: 2px solid #ccc;
+}
+
+.confirm-wrapper {
+  width: 90%;
+  margin: 10px auto;
+}
+
+.confirm-subtitle > p > strong {
+  color: #f05650;
+}
+
+.confirm-menu-wrapper {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 50px;
+}
+
+.confirm-menu-left {
+  display: flex;
+  width: 50%;
+}
+
+.confirm-menu-left > p {
+  font-weight: bold;
+  width: 25%;
+}
+
+.confirm-space {
+  width: 10%;
+}
+
+.confirm-menu-right {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+}
+
+.confirm-menu-right > p {
+  width: 25%;
+  font-weight: bold;
+}
+
+.confirm-table {
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+  justify-content: center;
+
+  width: 100%;
+  height: auto;
+
+  margin-bottom: 25px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.confirm-table-head {
+  background-color: #f8f9fb;
+}
+
+.confirm-table-head > th {
+  font-weight: bolder;
+  color: #3b3b3b;
+}
+
+.confirm-table-num {
+  width: 13.6%;
+}
+
+.confirm-table-name {
+  width: 30%;
+}
+
+.confirm-table-day {
+  width: 20%;
+}
+
+.confirm-table-count {
+  width: 7.6%;
+}
+
+.confirm-table-cancel {
+  width: 15.2%;
+}
+
+.confirm-table-status {
+  width: 13.6%;
+}
