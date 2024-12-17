@@ -1,5 +1,4 @@
 import "./SearchWeek.css";
-import { MypageContext } from "../../mypageContext/mypageContext";
 import { useContext, useState } from "react";
 import SelectBtn from "../SelectBtn";
 

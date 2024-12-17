@@ -17,14 +17,20 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 @CrossOrigin(origins = "http://localhost:3001")
 @RestController
 public class MypageController {
-	String testName = "user02";
-	
 	@Autowired
 	private MypageService mypageService;
 	
-	@PostMapping("/api/mypage/searchConfirmQuery") // 설정한 값으로 조회
-	public List<ConfirmDTO> searchConfirmQuery(@RequestBody ConfirmQueryDTO obj) throws JsonMappingException, JsonProcessingException {
-		List<ConfirmDTO> confirmList = mypageService.returnConfirmDTO(obj, testName);
+	@PostMapping("/api/mypage/searchConfirmQuery")
+	public List<ConfirmDTO> postConfirmQuery(@RequestBody String userName) {
+		String strUserName = userName.replace("\"", "");
+		
+		System.out.println("userName : " + strUserName);
+		
+		List<ConfirmDTO> confirmList = mypageService.returnConfirmDTO(strUserName);
+		
+		for(ConfirmDTO c : confirmList) {
+			System.out.println(c.getPf_title());
+		}
 		
 		return confirmList;
 	}

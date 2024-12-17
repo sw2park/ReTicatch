@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 
 import ConfirmNotice from "../mypage_components/mypage_confirm/ConfirmNotice";
-import SearchWeek from "../mypage_components/mypage_confirm/SearchWeek";
-import SelectSection from "../mypage_components/mypage_confirm/SelectSection";
+
 import ConfirmSubTitle from "../mypage_components/mypage_confirm/ConfirmSubTitle";
 import ConfirmMenuNoitce from "../mypage_components/mypage_confirm/ConfirmMenuNotice";
 import TableRow from "../mypage_components/mypage_confirm/TableRow";
@@ -16,9 +15,29 @@ function ConfirmReservePage() {
   const [listData, setListData] = useState([]);
 
   useEffect(() => {
-    // setTableData();
+    postTableData();
     // getTableData();
   }, []);
+
+  async function postTableData() {
+    const username = 'user02'; // 테스트용
+
+    try {
+      const response = await fetch("/api/mypage/searchConfirmQuery", {
+        method: "POST",
+        headers: { "Content-Type" : "application/json"},
+        body: JSON.stringify(username),
+      });
+      if(!response.ok) {
+        throw Error(`Error : ${response.status}`);
+      }
+      const responseData = await response.json();
+      console.log(response);
+      // setListData(responseData.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   async function getTableData() {
     await axios
@@ -37,18 +56,9 @@ function ConfirmReservePage() {
   return (
       <div className="confirm-wrapper">
         <div className="confirm-title">
-          <h1>예매 확인</h1>
+          <h1>예매 확인 / 취소</h1>
         </div>
         <ConfirmSubTitle />
-        <div className="confirm-menu-wrapper">
-          <div className="confirm-menu-left">
-            <SearchWeek />
-            <div className="confirm-space"></div>
-          </div>
-          <div className="confirm-menu-right">
-            <SelectSection />
-          </div>
-        </div>
         <div className="confirm-notice-wrapper">
           <ConfirmMenuNoitce />
         </div>

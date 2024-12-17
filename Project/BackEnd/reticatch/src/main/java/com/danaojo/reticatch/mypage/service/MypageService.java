@@ -29,36 +29,25 @@ public class MypageService {
 	private PfJoinRepository pfJoinRepository;
 	
 	@Transactional
-	public List<ConfirmDTO> returnConfirmDTO(ConfirmQueryDTO obj, String userName) {
-		MypageUtil util = new MypageUtil();
-		String mode = obj.getMode();
-		String year = obj.getYear();
-		String month = obj.getMonth();
-		
-		// 날짜 세팅 
-		String prevDate = util.calcPrevDate(year, month); // 조건 시작일 ex) 12월 선택시 12-01로 변경
-		String nextDate = util.calcNextDate(year, month); // 조건 끝나는날 ex_ 12월 선택시 12-31로 변경
-		
+	public List<ConfirmDTO> returnConfirmDTO(String userName) {
 		List<ConfirmDTO> confirmList = new ArrayList<>();
 		
+		// 시퀀스 아이디 찾기
 		Long userSeq = getUserSeq(userName);
-		
-		// 이전날짜 세팅 후 전달 > 쿼리문 변경
-		List<Orders> orderList = getMypageOrder(userSeq, mode, prevDate, nextDate);
+		System.out.println("userSeq : " + userSeq);
+		// 주문내역 조회
+		List<Orders> orderList = getMypageOrder(userSeq);
 		for(Orders ocDto : orderList) {
 			ConfirmDTO cDto = new ConfirmDTO();
-			
+			System.out.println("들어오냐?");
 			cDto.setAblecancleDate(ocDto.getCancel_date());
 			cDto.setCancel_status(ocDto.getCancel_status());
 			cDto.setPf_title(getTitle(ocDto.getSeq_pfjoin_id().getSeq_pfjoin_id()));
 			cDto.setSeq_order_id(ocDto.getSeq_order_id());
 			cDto.setTotal_ticket(ocDto.getTotal_ticket());
 			cDto.setView_date(ocDto.getView_date());
-			
+			System.out.println("cDto.getpfTitle : " + cDto.getPf_title());
 			confirmList.add(cDto);
-			
-			// 테스트 출력
-			System.out.println(cDto.getPf_title());
 		}
 		return confirmList; 
 	}
@@ -67,8 +56,8 @@ public class MypageService {
 		return pfJoinRepository.getTitle(pfJoinSeq);
 	}
 	
-	public List<Orders> getMypageOrder(Long userSeq, String mode, String prevDate, String nextDate) {
-		return ordersRepository.getOrderDto(userSeq, mode, prevDate, nextDate);
+	public List<Orders> getMypageOrder(Long userSeq) {
+		return ordersRepository.getOrderDto(userSeq);
 	}
 	
 	public int getOrderCount(Long userSeq) {

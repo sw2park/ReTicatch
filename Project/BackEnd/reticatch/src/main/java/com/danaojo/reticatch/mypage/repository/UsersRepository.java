@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import com.danaojo.reticatch.entity.Users;
 
 public interface UsersRepository extends JpaRepository<Users, Long> {
-	@Query("SELECT seq_user_id FROM Users u WHERE u.user_name = :user_name")
+	@Query(value = "SELECT seq_user_id FROM users u WHERE user_name = :user_name", nativeQuery = true )
 	Long findByUser_Name(String user_name);
 }

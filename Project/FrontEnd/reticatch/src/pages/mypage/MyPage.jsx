@@ -5,7 +5,6 @@ import Calendar from "./mypage_components/Calendar";
 import Topbar from "./mypage_components/TopBar";
 import TabList from "./mypage_components/mypage_menu/TabList";
 
-import CancleReservePage from "./mypage_pages/CancleReservePage";
 import ConfirmReservePage from "./mypage_pages/ConfirmReservePage";
 import DeleteMemberPage from "./mypage_pages/DeleteMemberPage";
 import ManageExceptionPage from "./mypage_pages/ManageExceptionPage";
@@ -24,8 +23,6 @@ function MyPage() {
     switch (contents) {
       case "ConfirmReservePage":
         return <ConfirmReservePage />;
-      case "CancleReservePage":
-        return <CancleReservePage />;
       case "ManageExceptionPage":
         return <ManageExceptionPage />;
       case "ManageReviewPage":
@@ -57,14 +54,7 @@ function MyPage() {
                     handleSelect("ConfirmReservePage");
                   }}
                 >
-                  예매 확인
-                </TabList>
-                <TabList
-                  onClick={() => {
-                    handleSelect("CancleReservePage");
-                  }}
-                >
-                  예매 취소
+                  예매 확인 / 취소
                 </TabList>
               </ul>
             </div>

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MypageUtil {
+	
 	// 조건 시작일 ex) 12월 선택시 12-01로 설정하는 메소드 return : yyyy-MM-dd
 	public String calcPrevDate(String year, String month) {
 		// String -> int 변환
