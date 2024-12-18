@@ -73,7 +73,7 @@ function MyPage() {
                     handleSelect("ManageReviewPage");
                   }}
                 >
-                  후기관리
+                  후기 관리
                 </TabList>
                 <TabList
                   onClick={() => {
