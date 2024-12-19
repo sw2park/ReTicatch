@@ -1,16 +1,16 @@
 spring:
   application:
-    name: ticatch		
+    name: ticatch   
   thymeleaf:
     cache: false
   datasource:
     url: jdbc:oracle:thin:@localhost:1521:xe
-    driver-class-name: oracle.jdbc.OracleDriver	
+    driver-class-name: oracle.jdbc.OracleDriver 
     username: danaojo
     password: danaojo
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         format-sql: true
@@ -23,11 +23,11 @@ server:
     encoding:
       charset: UTF-8
       enabled: true
-      force: true	
+      force: true 
 
 logging:
   level:
     org:
       hibernate:
-        SQL: OFF
-        type: trace	
+        SQL: debug
+        type: trace 

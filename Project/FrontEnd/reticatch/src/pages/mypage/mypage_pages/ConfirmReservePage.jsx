@@ -1,85 +1,47 @@
 import { useState, useEffect } from "react";
 
 import ConfirmNotice from "../mypage_components/mypage_confirm/ConfirmNotice";
-import SearchWeek from "../mypage_components/mypage_confirm/SearchWeek";
-import SelectSection from "../mypage_components/mypage_confirm/SelectSection";
+
 import ConfirmSubTitle from "../mypage_components/mypage_confirm/ConfirmSubTitle";
 import ConfirmMenuNoitce from "../mypage_components/mypage_confirm/ConfirmMenuNotice";
 import TableRow from "../mypage_components/mypage_confirm/TableRow";
-import MypageContextProvider, {
-  MypageContext,
-} from "../mypageContext/mypageContext";
-import { useContext } from "react";
 
 import "./ConfirmReservePage.css";
-import axios from "axios";
 
-const BASE_URL = "http://localhost:9090/mypage/";
+const BASE_URL = "http://localhost:9090/api/mypage/";
 
 function ConfirmReservePage() {
   const [listData, setListData] = useState([]);
-  const { selectMode } = useContext(MypageContext);
-  const { selectMonth } = useContext(MypageContext);
-  const { selectYear } = useContext(MypageContext);
-  const { searchWeek } = useContext(MypageContext);
 
   useEffect(() => {
-    setTableQuery();
-    getTableData();
+    postTableData();
   }, []);
 
-  async function setTableQuery() {
-    await axios
-      .post(
-        BASE_URL + "searchConfirmQuery",
-        {
-          searchWeek,
-          selectMode,
-          selectMonth,
-          selectYear,
-        },
-        { "Content-Type": "application/json", withCredentials: true }
-      )
-      .then((response) => {
-        console.log("데이터 통신 성공");
-        console.log(searchWeek, selectMode, selectMonth, selectYear);
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
+  async function postTableData() {
+    const username = 'user02'; // 테스트용 라우터로 통합시 userid로 왔다갔다 할 예정
 
-  async function getTableData() {
-    await axios
-      .get(BASE_URL + "searchConfirm")
-      .then((response) => {
-        console.log("데이터 통신 성공");
-        console.log(response.data);
-
-        setListData(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
+    try {
+      const response = await fetch(BASE_URL + "searchConfirmQuery", {
+        method: "POST",
+        headers: { "Content-Type" : "application/json"},
+        body: JSON.stringify(username),
       });
+      if(!response.ok) {
+        throw Error(`Error : ${response.status}`);
+      }
+      const responseData = await response.json();
+      setListData(responseData);
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   return (
-    <MypageContextProvider>
       <div className="confirm-wrapper">
         <div className="confirm-title">
-          <h1>예매 확인</h1>
+          <h1>예매 확인 / 취소</h1>
         </div>
         <ConfirmSubTitle />
-        <div className="confirm-menu-wrapper">
-          <div className="confirm-menu-left">
-            <SearchWeek />
-            <div className="confirm-space"></div>
-          </div>
-          <div className="confirm-menu-right">
-            <SelectSection />
-          </div>
-        </div>
         <div className="confirm-notice-wrapper">
           <ConfirmMenuNoitce />
         </div>
@@ -91,12 +53,12 @@ function ConfirmReservePage() {
             <th className="confirm-table-count">매수</th>
             <th className="confirm-table-cancel">취소가능일</th>
             <th className="confirm-table-status">상태</th>
+            <th className="confirm-table-buttton">취소하기</th>
             <TableRow listData={listData} />
           </table>
         </div>
         <ConfirmNotice />
       </div>
-    </MypageContextProvider>
   );
 }
 

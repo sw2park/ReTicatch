@@ -6,3 +6,20 @@
   height: 1px;
   overflow: auto;
 }
+
+.confirm-table-row-button {
+  border: 1px solid #ccccccd3;
+  border-radius: 15px;
+  color: white;
+  background-color: #ccccccd3;
+
+  font-weight: bolder;
+  width: 80%;
+  height: 80%;
+}
+
+.confirm-table-row-button:hover {
+  cursor: pointer;
+  background-color: black;
+  border: 1px solid black;
+}

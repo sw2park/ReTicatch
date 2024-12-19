@@ -43,7 +43,6 @@ public class KopisUtil {
 			pf.setPd_hall_name(list.get(i).getPf_hall_name());
 			if(list.get(i).getPf_cast().equals(" ")) {
 				continue;
-//				pf.setPd_cast(null);
 			} else {
 				pf.setPd_cast(list.get(i).getPf_cast());				
 			}
