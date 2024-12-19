@@ -1,0 +1,65 @@
+.login-form {
+  width: 100%; /* 가로 전체를 채움 */
+  height: 100vh; /* 화면 높이 전체를 채움 */
+  display: flex;
+  justify-content: center; /* 가로 중앙 정렬 */
+  align-items: center; /* 세로 중앙 정렬 */
+  margin: 0; /* 여백 제거 */
+}
+
+.login-form .con {
+  border-radius: 30px;
+  width: 600px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 38px rgba(0, 0, 0, 0.5), 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+p {
+  font-weight: bold;
+}
+
+input {
+  width: 300px;
+  height: 30px;
+  border: 0.5px solid black;
+  border-radius: 10px;
+  opacity: 0.3;
+}
+
+.login-form button {
+  font-size: 1.1rem;
+  font-weight: bold;
+  width: 400px;
+  height: 45px;
+  border-radius: 10px;
+  border: none;
+  background-color: black;
+  color: white;
+  margin-top: 20px;
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+/* login-2 스타일 */
+.social-login {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 50px;
+}
+
+.social-login > button {
+  cursor: pointer;
+}
+
+.social-login > .naver {
+  margin-right: 10px;
+}

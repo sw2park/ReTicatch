@@ -20,6 +20,7 @@ img {
 /* 노말라이즈 끝 */
 .mypage-body {
   height: 100%;
+  margin-bottom: 10px;
 }
 
 .flex-container {

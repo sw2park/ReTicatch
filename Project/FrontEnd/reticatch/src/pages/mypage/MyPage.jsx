@@ -4,6 +4,7 @@ import "./MyPage.css";
 import Calendar from "./mypage_components/Calendar";
 import Topbar from "./mypage_components/TopBar";
 import TabList from "./mypage_components/mypage_menu/TabList";
+import Footer from "../main/footer/Footer";
 
 import ConfirmReservePage from "./mypage_pages/ConfirmReservePage";
 import DeleteMemberPage from "./mypage_pages/DeleteMemberPage";
@@ -39,6 +40,7 @@ function MyPage() {
   };
 
   return (
+    <>
     <main className="mypage-body">
       <Topbar />
       <div className="flex-container">
@@ -110,6 +112,8 @@ function MyPage() {
         </div>
       </div>
     </main>
+      <Footer />
+    </>
   );
 }
 
