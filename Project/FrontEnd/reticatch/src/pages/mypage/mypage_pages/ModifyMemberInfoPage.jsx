@@ -8,7 +8,6 @@ function ModifyMemberInfoPage() {
 
   const [userId, setUserId] = useState();
   const [userPW, setUserPW] = useState();
-  const [userEmail, setUserEmail] = useState();
   const [userName, setUserName] = useState();
   const [userPhone, setUserPhone] = useState();
 
@@ -28,10 +27,6 @@ function ModifyMemberInfoPage() {
     setUserName(event.target.value);
   }
 
-  function onChangeEmail(event) {
-    setUserEmail(event.target.value);
-  }
-
   function onChangePhone(event) {
     setUserPhone(event.target.value);
   }
@@ -49,7 +44,7 @@ function ModifyMemberInfoPage() {
     }
   }
 
-  function handleUpdateButton(seq_user_id) {    
+  function handleUpdateButton(seq_user_id) {
     postUpadateUserData(seq_user_id);
   }
 
@@ -57,11 +52,10 @@ function ModifyMemberInfoPage() {
     try {
       const reqData = {
         seq_user_id,
-        userId,
+        userId : sessionStorage.getItem('loginId'),
         userPW,
         userName,
         userPhone,
-        userEmail,
       };
 
       const response = await fetch(
@@ -72,10 +66,10 @@ function ModifyMemberInfoPage() {
           body: JSON.stringify(reqData),
         }
       );
-      if(!response.ok) {
+      if (!response.ok) {
         throw Error(`Error : ${response.status}`);
       }
-      alert('회원정보 수정 완료!');
+      alert("회원정보 수정 완료!");
       window.location.reload();
     } catch (e) {
       console.log(e);
@@ -83,7 +77,7 @@ function ModifyMemberInfoPage() {
   }
 
   async function postUserData() {
-    const username = "ak48"; // 테스트용 라우터로 통합시 userid로 왔다갔다 할 예정
+    const username = sessionStorage.getItem("loginId");
 
     try {
       const response = await fetch(
@@ -114,18 +108,7 @@ function ModifyMemberInfoPage() {
           <table className="modify-table">
             <tr>
               <th className="modify-table-th">아이디</th>
-              <td className="modify-table-td">
-                {isModify == true ? (
-                  <input
-                    type="text"
-                    className="modify-table-input"
-                    placeholder={userData.user_id}
-                    onChange={onChangeId}
-                  />
-                ) : (
-                  userData.user_id
-                )}
-              </td>
+              <td className="modify-table-td">{userData.user_id}</td>
             </tr>
             <tr>
               <th className="modify-table-th">비밀번호</th>
@@ -154,21 +137,6 @@ function ModifyMemberInfoPage() {
                   />
                 ) : (
                   userData.user_name
-                )}
-              </td>
-            </tr>
-            <tr>
-              <th className="modify-table-th">이메일</th>
-              <td className="modify-table-td">
-                {isModify == true ? (
-                  <input
-                    type="text"
-                    className="modify-table-input"
-                    placeholder={userData.user_email}
-                    onChange={onChangeEmail}
-                  />
-                ) : (
-                  userData.user_email
                 )}
               </td>
             </tr>

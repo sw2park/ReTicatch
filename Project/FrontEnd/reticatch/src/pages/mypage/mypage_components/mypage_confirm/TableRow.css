@@ -3,7 +3,7 @@
 }
 
 .confirm-table-row > td {
-  height: 1px;
+  height: 40px;
   overflow: auto;
 }
 

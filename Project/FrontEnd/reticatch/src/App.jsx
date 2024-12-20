@@ -14,6 +14,7 @@ import MainSlide2 from "./pages/main/banner/MainSlide2.jsx";
 import Footer from "./pages/main/footer/Footer.jsx";
 
 import MyPage from "./pages/mypage/mypage";
+import DetailMain from "./pages/detail/DetailMain.jsx";
 
 function App() {
   const location = useLocation(); // 현재 경로 가져오기
@@ -28,7 +29,8 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<AddMemberForm />} />
-        <Route path="/mypage" element={<MyPage/>} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/detail/:seqpfjoinId/view" element={<DetailMain />} />
         <Route
           path="/"
           element={
