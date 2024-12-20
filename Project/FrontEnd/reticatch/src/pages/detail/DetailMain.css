@@ -18,3 +18,177 @@ img {
 }
 
 /* 노말라이즈 끝 */
+.detail-main {
+  width: 1400px;
+  height: auto;
+  margin: 0 auto;
+}
+
+.detail-info-header-wrap {
+  height: 460px;
+
+  display: flex;
+  flex-direction: row;
+}
+
+.detail-info-header-wrap-left {
+  display: flex;
+  flex-direction: column;
+
+  width: 40%;
+  height: 100%;
+}
+
+.detail-info-header-poster {
+  height: 100%;  
+}
+
+.detail-info-header-wrap-right {
+  display: flex;
+  flex-direction: column;
+  
+  width: 60%;
+  height: 100%;
+}
+
+.detail-info-header-title {
+  width: 100%;
+  height: 10%;
+  
+  border-bottom: 2px solid black;
+}
+
+.detail-info-header-table {
+  width: 100%;
+  height: 90%;
+}
+
+.detail-info-poster {
+  width: 55%;
+  margin: 0 25%;
+
+  border-radius: 20px;
+  height: auto;
+}
+
+.detail-info-title {
+  width: 100%;
+  height: 100%;
+
+  font-size: x-large;
+  font-weight: bolder;
+
+  display: flex;
+  align-items: center;
+  justify-content: left;
+
+  overflow: hidden;
+}
+
+.detail-info-header-table {
+  width: 100%;
+  height: 80%;
+}
+
+.detail-info-table-head {
+  width: 20%;
+  height: 40px;
+
+  text-align: left;
+  color: #636d7d;
+}
+
+.detail-info-table-data {
+  width: 30%;
+  height: 40px;
+
+  text-align: left;
+  color: #3c3846;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.detail-reserve-box-wrap {
+  width: 100%;
+  height: 200px;
+  
+  display: flex;
+
+  border: 1px solid black;
+  border-radius: 20px;
+}
+
+.detail-reserve-box-left {
+  width: 40%;
+  border-right: 1px solid rgba(0, 0, 0, 0.402);
+
+  display: flex;
+}
+
+.detail-reserve-box-left-header {
+  width: 40%;
+  flex-direction: column;
+
+  padding: 10px;
+  display: flex;
+}
+
+.detail-reserve-box-step {
+  color: rgb(196, 66, 52);
+  flex-direction: row;
+  font-weight: bolder;
+}
+
+.detail-reserve-box-title {
+  color: black;
+  flex-direction: row;
+  font-weight: bolder;
+}
+.detail-reserve-box-left-content {
+  width: 60%;
+  flex-direction: column;
+}
+
+.detail-reserve-box-center {
+  width: 30%;
+  border-right: 1px solid rgba(0, 0, 0, 0.402);
+
+  padding: 10px;
+  display: flex;
+}
+
+.detail-reserve-box-center-header {
+  width: 40%;
+  flex-direction: column;
+  display: flex;
+}
+
+.detail-reserve-box-right {
+  width: 30%; 
+  padding: 10px;
+}
+
+.detail-reserve-right-title {
+  width: 100%;
+  height: 10%;
+}
+
+.detail-reserve-right-table {
+  width: 100%;
+  height: 90%;
+}
+
+.detail-reserve-table-head {
+  width: 40%;
+  text-align: left;
+}
+
+.detail-reserve-table-data {
+  width: 60%;
+  text-align: right;
+  font-weight: bolder;
+
+  color: rgb(196, 66, 52);
+}
