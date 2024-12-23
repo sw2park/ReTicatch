@@ -12,4 +12,5 @@ public class CancelReserveDTO {
 	private String ablecancleDate;
 	private String cancel_status;
 	private String username;
+	private Long seq_pfjoin_id;
 }

@@ -3,8 +3,14 @@ package com.danaojo.reticatch.mypage.util;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
+import com.danaojo.reticatch.detail.dto.AddExpectationDTO;
+import com.danaojo.reticatch.detail.dto.AddOrderDTO;
+import com.danaojo.reticatch.detail.dto.AddReviewDTO;
 import com.danaojo.reticatch.mypage.dto.CancelReserveDTO;
 import com.danaojo.reticatch.mypage.dto.UserDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -12,6 +18,46 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MypageUtil {
+	public AddExpectationDTO mappingAddExpectation(String data) throws JsonMappingException, JsonProcessingException {
+		AddExpectationDTO aDto = new AddExpectationDTO();
+		ObjectMapper objMapper = new ObjectMapper();
+		
+		aDto = objMapper.readValue(data, AddExpectationDTO.class);
+		
+		return aDto;
+	}
+	
+	public AddReviewDTO mappingAddReviewDto(String data) throws JsonMappingException, JsonProcessingException {
+		AddReviewDTO aDto = new AddReviewDTO();
+		ObjectMapper objMapper = new ObjectMapper();
+		
+		aDto = objMapper.readValue(data, AddReviewDTO.class);
+		
+		return aDto;
+	}
+	
+	// AddOrderDTO로 매핑
+	public AddOrderDTO mappingAddOrderDto(String data) throws JsonMappingException, JsonProcessingException {
+		AddOrderDTO aDto = new AddOrderDTO();
+		ObjectMapper objMapper = new ObjectMapper();
+		
+		aDto = objMapper.readValue(data, AddOrderDTO.class);
+		
+		return aDto;
+	}
+	
+	// String 데이터를 넘겨주면 | 제거 후 List<String> 형태로 리턴
+	public List<String> splitString(String data) {
+		List<String> returnData = new ArrayList<>();
+		if (data == null || data.isEmpty()) {
+			return returnData; // 빈 데이터 반환
+		}
+		String[] dataArr = data.split("\\|"); // | 기준으로 분리
+		returnData.addAll(Arrays.asList(dataArr)); // 분리된 데이터를 리스트에 추가
+
+		return returnData;
+	}
+
 	// String 데이터를 넘겨주면 UserDTO에 매핑해서 리턴
 	public UserDTO mappingUserDto(String data) throws JsonMappingException, JsonProcessingException {
 		UserDTO uDto = new UserDTO();

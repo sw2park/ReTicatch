@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import "./TableRow.css";
 
 function TableRow({ listData }) {
   async function postCancelReserve(data) {
-    const username = "user02"; // 테스트용 라우터로 통합시 userid로 왔다갔다 할 예정
+    const username = sessionStorage.getItem("loginId");
 
     try {
       const reqData = { ...data, username };
@@ -36,10 +37,14 @@ function TableRow({ listData }) {
   }
   return (
     <>
+    {console.log(listData)}
       {listData.map((data) => (
         <tr className="confirm-table-row" key={data.seq_order_id}>
           <td>{data.seq_order_id}</td>
-          <td>{data.pf_title}</td>
+          <Link to={`/detail/${data.seq_pfjoin_id}/view`}>
+          {console.log(data.seq_pfjoin_id)}
+            <td>{data.pf_title}</td>
+          </Link>
           <td>{data.view_date}</td>
           <td>{data.total_ticket}장</td>
           <td>{data.ablecancleDate}</td>

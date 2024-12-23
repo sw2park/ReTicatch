@@ -7,6 +7,7 @@ import lombok.Setter;
 public class ConfirmDTO {
 	// 마이페이지 기준
 	private Long seq_order_id; // 예매번호
+	private Long seq_pfjoin_id; // pfjoinid
 	private String pf_title; // 티켓명
 	private String view_date; // 관람일시
 	private String total_ticket; // 매수

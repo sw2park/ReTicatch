@@ -6,15 +6,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.danaojo.reticatch.entity.Expectation;
 import com.danaojo.reticatch.entity.Orders;
+import com.danaojo.reticatch.entity.Review;
 import com.danaojo.reticatch.entity.Users;
+import com.danaojo.reticatch.expectation.repository.ExpectationRepository;
 import com.danaojo.reticatch.mypage.dto.CancelReserveDTO;
 import com.danaojo.reticatch.mypage.dto.ConfirmDTO;
+import com.danaojo.reticatch.mypage.dto.PostReviewListDTO;
+import com.danaojo.reticatch.mypage.dto.PostSomeCountDTO;
 import com.danaojo.reticatch.mypage.dto.UserDTO;
+import com.danaojo.reticatch.mypage.dto.postExceptionListDTO;
 import com.danaojo.reticatch.mypage.repository.OrdersRepository;
 import com.danaojo.reticatch.mypage.repository.PfJoinRepository;
 import com.danaojo.reticatch.mypage.repository.UsersRepository;
 import com.danaojo.reticatch.mypage.util.MypageUtil;
+import com.danaojo.reticatch.review.repository.ReviewRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -29,11 +36,17 @@ public class MypageService {
 	@Autowired
 	private PfJoinRepository pfJoinRepository;
 
+	@Autowired
+	private ExpectationRepository expectationRepository;
+
+	@Autowired
+	private ReviewRepository reviewRepository;
+
 	@Transactional
 	public void updateUserData(UserDTO data) {
 		MypageUtil util = new MypageUtil();
 		String today = util.returnToday();
-		
+
 		Long seq_user_id = data.getSeq_user_id();
 		String userId = data.getUserId();
 		String userPW = data.getUserPW();
@@ -41,10 +54,9 @@ public class MypageService {
 		String userName = data.getUserName();
 		String userEmail = data.getUserEmail();
 		String updateDate = today;
-		
-		updateUserDB(seq_user_id, userId, userPW, userPhone, userName,userEmail, updateDate);
-	}
 
+		updateUserDB(seq_user_id, userId, userPW, userPhone, userName, userEmail, updateDate);
+	}
 
 	@Transactional
 	public Users searchUserData(String userName) {
@@ -88,6 +100,7 @@ public class MypageService {
 		for (Orders ocDto : orderList) {
 			ConfirmDTO cDto = new ConfirmDTO();
 
+			cDto.setSeq_pfjoin_id(ocDto.getSeq_pfjoin_id().getSeq_pfjoin_id());
 			cDto.setAblecancleDate(ocDto.getCancel_date());
 			cDto.setCancel_status(ocDto.getCancel_status());
 			cDto.setPf_title(getTitle(ocDto.getSeq_pfjoin_id().getSeq_pfjoin_id()));
@@ -122,9 +135,74 @@ public class MypageService {
 	public Long getUserSeq(String userName) {
 		return usersRepository.findByUser_Name(userName);
 	}
-	
+
 	public void updateUserDB(Long seq_user_id, String userId, String userPW, String userPhone, String userName,
 			String userEmail, String updateDate) {
 		usersRepository.updateUserDB(seq_user_id, userId, userPW, userPhone, userName, userEmail, updateDate);
+	}
+
+	public void postDeleteUser(String useName) {
+		Long userSeq = usersRepository.findByUser_Name(useName);
+		Users users = usersRepository.searchUserData(userSeq);
+		usersRepository.delete(users);
+	}
+
+	public List<postExceptionListDTO> postExceptionList(String userId) {
+		Long userSeq = usersRepository.findByUser_Name(userId);
+		List<Expectation> eList = expectationRepository.findByUserSeq(userSeq);
+
+		List<postExceptionListDTO> pList = new ArrayList<>();
+
+		for (int i = 0; i < eList.size(); i++) {
+			postExceptionListDTO pDto = new postExceptionListDTO();
+
+			pDto.setTicketName(eList.get(i).getSeq_pfjoin_id().getP_title());
+			pDto.setSeq_pfJoin_id(eList.get(i).getSeq_pfjoin_id().getSeq_pfjoin_id());
+			pDto.setDate(eList.get(i).getExp_date());
+			pDto.setContext(eList.get(i).getExp_content());
+
+			pList.add(pDto);
+		}
+
+		return pList;
+	}
+
+	public List<PostReviewListDTO> postReviewList(String userId) {
+		Long userSeq = usersRepository.findByUser_Name(userId);
+		List<Review> eList = reviewRepository.findByUserSeq(userSeq);
+
+		List<PostReviewListDTO> pList = new ArrayList<>();
+
+		for (int i = 0; i < eList.size(); i++) {
+			PostReviewListDTO pDto = new PostReviewListDTO();
+
+			pDto.setTicketName(eList.get(i).getSeq_pfjoin_id().getP_title());
+			pDto.setSeq_pfJoin_id(eList.get(i).getSeq_pfjoin_id().getSeq_pfjoin_id());
+			pDto.setDate(eList.get(i).getReview_date());
+			pDto.setContext(eList.get(i).getReview_content());
+
+			pList.add(pDto);
+		}
+
+		return pList;
+	}
+
+	public PostSomeCountDTO postSomeCount(String userId) {
+		int reviewCount = 0;
+		int expectionCount = 0;
+		int reserveCount = 0;
+		Long userSeq = usersRepository.findByUser_Name(userId);
+
+		reviewCount = reviewRepository.postSomeCount(userSeq);
+		expectionCount = expectationRepository.postSomeCount(userSeq);
+		reserveCount = ordersRepository.postSomeCount(userSeq);
+
+		PostSomeCountDTO pDto = new PostSomeCountDTO();
+
+		pDto.setReviewCount(reviewCount);
+		pDto.setExpectionCount(expectionCount);
+		pDto.setReserveCount(reserveCount);
+
+		return pDto;
 	}
 }

@@ -1,0 +1,22 @@
+.delete-title-wrap {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.delete-title-button {
+    width: 20%;
+    height: 40px;
+
+    border: none;
+    border-radius: 15px;
+
+    font-size: larger;
+    font-weight: bolder;
+    color: white;
+    background-color: rgb(146, 0, 0);
+}
+
+.delete-title-button:hover {
+    cursor: pointer;
+    background-color: red;
+}

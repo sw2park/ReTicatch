@@ -18,7 +18,7 @@ function ConfirmReservePage() {
   }, []);
 
   async function postTableData() {
-    const username = 'user02'; // 테스트용 라우터로 통합시 userid로 왔다갔다 할 예정
+    const username = sessionStorage.getItem('loginId');
 
     try {
       const response = await fetch(BASE_URL + "searchConfirmQuery", {
