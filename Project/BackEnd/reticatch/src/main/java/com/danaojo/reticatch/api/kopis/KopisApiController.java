@@ -20,7 +20,7 @@ public class KopisApiController {
 			apiUrl += util.returnNowToday();
 			apiUrl += "&eddate=";
 			apiUrl += util.returnAfterday();
-			apiUrl += "&cpage=1&rows=10";
+			apiUrl += "&cpage=1&rows=20";
 			
 			// URL API 설정
 			URL url = new URL(apiUrl);

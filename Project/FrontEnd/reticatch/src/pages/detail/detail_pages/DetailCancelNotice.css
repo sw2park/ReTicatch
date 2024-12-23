@@ -1,0 +1,33 @@
+.cancel-contents-wrap {
+  width: 80%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.cancel-contents-text-wrap {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.cancel-contents-text-contents {
+  font-weight: normal;
+  width: 100%;
+  margin-left: 3%;
+}
+
+.cancel-contents-table-wrap {
+  width: 80%;
+  margin: 0 auto;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+.cancel-contents-table-head {
+  background-color: gainsboro;
+  border: 1px solid black;
+}
+
+.cancel-contents-table-data {
+  padding-left: 20px;
+  border: 1px solid black;
+}
