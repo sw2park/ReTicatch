@@ -52,7 +52,7 @@ function ModifyMemberInfoPage() {
     try {
       const reqData = {
         seq_user_id,
-        userId : sessionStorage.getItem('loginId'),
+        userId: sessionStorage.getItem("loginId"),
         userPW,
         userName,
         userPhone,
@@ -127,18 +127,7 @@ function ModifyMemberInfoPage() {
             </tr>
             <tr>
               <th className="modify-table-th">이름</th>
-              <td className="modify-table-td">
-                {isModify == true ? (
-                  <input
-                    type="text"
-                    className="modify-table-input"
-                    placeholder={userData.user_name}
-                    onChange={onChangeName}
-                  />
-                ) : (
-                  userData.user_name
-                )}
-              </td>
+              <td className="modify-table-td">{userData.user_name}</td>
             </tr>
             <tr>
               <th className="modify-table-th">연락처</th>

@@ -37,10 +37,12 @@ function TableRow({ listData }) {
   }
   return (
     <>
+    {console.log(listData)}
       {listData.map((data) => (
         <tr className="confirm-table-row" key={data.seq_order_id}>
           <td>{data.seq_order_id}</td>
           <Link to={`/detail/${data.seq_pfjoin_id}/view`}>
+          {console.log(data.seq_pfjoin_id)}
             <td>{data.pf_title}</td>
           </Link>
           <td>{data.view_date}</td>

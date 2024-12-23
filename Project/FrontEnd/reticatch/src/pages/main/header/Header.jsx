@@ -11,24 +11,23 @@ export default function Header() {
 
   function handleLogoutBtn () {
     setIsLogin(false);
+    // 세션해제
     sessionStorage.clear();
     sessionStorage.removeItem('loginId');
-    // 세션해제
+    alert('로그아웃되었습니다!');
+    window.location.reload();
   }
 
   return (
     <header>
       <div className="top-bar-gray">
-        {isLogin == false ? (
+        {isLogin == undefined || isLogin == null ? (
           <ul className="top-bar-gray-right">
             <Link to="/login">
               <li className="top-bar-gray-right-list">로그인</li>
             </Link>
             <Link to="/signup">
               <li className="top-bar-gray-right-list">회원가입</li>
-            </Link>
-            <Link to="/mypage">
-              <li className="top-bar-gray-right-list">예매확인/취소</li>
             </Link>
             <li className="top-bar-gray-right-list-end">고객센터</li>
           </ul>
@@ -44,7 +43,7 @@ export default function Header() {
       <div className="top-bar">
         <div className="con top-con">
           <div className="logo-box">
-            <Link to="/">다나오조</Link>
+            <Link to="/">Ticatch</Link>
           </div>
         </div>
       </div>

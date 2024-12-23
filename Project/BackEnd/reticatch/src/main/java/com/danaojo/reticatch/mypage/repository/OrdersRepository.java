@@ -22,4 +22,8 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
 	@Modifying
 	@Query(value = "UPDATE orders SET cancel_status = 'Y' WHERE seq_user_id = :userSeq AND seq_order_id = :orderSeq", nativeQuery = true)
 	void updateOrderStatus(@Param("userSeq") Long userSeq, @Param("orderSeq") Long orderSeq);
+
+	@Query(value = "SELECT COUNT(*) FROM orders o WHERE seq_user_id = :userSeq", nativeQuery = true)
+	int postSomeCount(@Param("userSeq") Long userSeq);
+
 }

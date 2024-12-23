@@ -18,4 +18,7 @@ public interface PfJoinRepository extends JpaRepository<PFJoin, Long>{
 
 	@Query(value = "SELECT * FROM pfjoin p WHERE seq_pfjoin_id = :seqNum", nativeQuery = true)
 	PFJoin getDetailPfJoin(@Param("seqNum") int seqNum);
+
+	@Query(value = "SELECT pd_img FROM pfjoin p WHERE seq_pfjoin_id = :seqNum", nativeQuery = true)
+	String getDetailImage(@Param("seqNum") int seqNum);
 }
